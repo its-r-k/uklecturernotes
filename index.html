@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UK Lecturer Physics Notes – Paper I & II</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Patrick+Hand&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1209;
+    --paper: #fdf8ee;
+    --ruled: #c8d8e8;
+    --margin: #e8b4b8;
+    --highlight-y: #fff59d;
+    --highlight-g: #c8e6c9;
+    --highlight-b: #bbdefb;
+    --highlight-p: #e1bee7;
+    --red: #c62828;
+    --blue: #1565c0;
+    --green: #2e7d32;
+    --purple: #6a1b9a;
+    --brown: #4e342e;
+    --accent: #f57f17;
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: #8d6e63;
+font-family: ‘Kalam’, cursive;
+min-height: 100vh;
+background-image: repeating-linear-gradient(45deg, #795548 0, #795548 1px, transparent 0, transparent 50%);
+background-size: 6px 6px;
+}
+
+/* –– TOP NAV –– */
+.top-nav {
+background: #3e2723;
+color: #fff8e1;
+padding: 12px 24px;
+display: flex; align-items: center; justify-content: space-between;
+position: sticky; top: 0; z-index: 100;
+box-shadow: 0 3px 12px rgba(0,0,0,0.5);
+}
+.top-nav h1 { font-family: ‘Caveat’, cursive; font-size: 1.6rem; letter-spacing: 1px; }
+.top-nav span { font-family: ‘Patrick Hand’, cursive; font-size: 0.9rem; opacity: 0.8; }
+.nav-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.nav-tab {
+background: #6d4c41; border: none; color: #fff8e1;
+padding: 6px 14px; border-radius: 20px; cursor: pointer;
+font-family: ‘Kalam’, cursive; font-size: 0.9rem;
+transition: background 0.2s;
+}
+.nav-tab:hover, .nav-tab.active { background: #f57f17; color: #1a1209; }
+
+/* –– MAIN LAYOUT –– */
+.container { max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
+
+/* –– NOTEBOOK SHEET –– */
+.notebook {
+background: var(–paper);
+border-radius: 4px;
+box-shadow: 4px 4px 16px rgba(0,0,0,0.4), -1px -1px 4px rgba(0,0,0,0.1);
+position: relative;
+overflow: hidden;
+margin-bottom: 32px;
+display: none;
+}
+.notebook.active { display: block; }
+
+/* ruled lines */
+.notebook::before {
+content: ‘’;
+position: absolute; inset: 0;
+background-image: repeating-linear-gradient(
+transparent, transparent 31px, var(–ruled) 31px, var(–ruled) 32px
+);
+background-size: 100% 32px;
+pointer-events: none; z-index: 0;
+}
+/* margin line */
+.notebook::after {
+content: ‘’;
+position: absolute; top: 0; bottom: 0; left: 72px; width: 2px;
+background: var(–margin); z-index: 1; pointer-events: none;
+}
+
+.page-header {
+background: #e53935;
+color: white;
+padding: 16px 24px 16px 88px;
+position: relative; z-index: 2;
+border-bottom: 3px solid #b71c1c;
+}
+.page-header h2 { font-family: ‘Caveat’, cursive; font-size: 1.8rem; }
+.page-header .subtitle { font-family: ‘Patrick Hand’, cursive; font-size: 0.9rem; opacity: 0.9; margin-top: 2px; }
+
+.page-content { padding: 16px 24px 32px 88px; position: relative; z-index: 2; }
+
+/* –– UNIT BLOCK –– */
+.unit-block { margin-bottom: 36px; }
+
+.unit-title {
+font-family: ‘Caveat’, cursive;
+font-size: 1.5rem;
+color: var(–blue);
+border-bottom: 2px dashed var(–blue);
+padding-bottom: 4px;
+margin-bottom: 12px;
+display: flex; align-items: center; gap: 10px;
+}
+.unit-badge {
+font-family: ‘Patrick Hand’, cursive;
+font-size: 0.7rem;
+padding: 2px 10px;
+border-radius: 12px;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.badge-11 { background: var(–highlight-g); color: #1b5e20; border: 1px solid #66bb6a; }
+.badge-12 { background: var(–highlight-b); color: #0d47a1; border: 1px solid #42a5f5; }
+.badge-ug { background: var(–highlight-p); color: #4a148c; border: 1px solid #ab47bc; }
+
+/* –– TOPIC NOTE CARD –– */
+.topic-card {
+background: rgba(255,255,255,0.55);
+border-left: 4px solid var(–blue);
+border-radius: 0 6px 6px 0;
+padding: 12px 14px;
+margin-bottom: 14px;
+position: relative;
+}
+.topic-card.red { border-left-color: var(–red); }
+.topic-card.green { border-left-color: var(–green); }
+.topic-card.purple { border-left-color: var(–purple); }
+.topic-card.brown { border-left-color: var(–brown); }
+.topic-card.accent { border-left-color: var(–accent); }
+
+.topic-name {
+font-family: ‘Caveat’, cursive;
+font-size: 1.15rem;
+color: var(–ink);
+font-weight: 700;
+margin-bottom: 6px;
+text-decoration: underline wavy #f57f17;
+}
+.topic-name .arrow { color: var(–accent); margin-right: 4px; }
+
+.note-line {
+font-family: ‘Kalam’, cursive;
+font-size: 0.97rem;
+color: #2d2d2d;
+line-height: 1.9;
+margin-bottom: 2px;
+}
+.note-line::before { content: ’• ’; color: var(–red); font-weight: bold; }
+
+.formula-box {
+background: var(–highlight-y);
+border: 1.5px solid #f9a825;
+border-radius: 6px;
+padding: 8px 12px;
+margin: 8px 0;
+font-family: ‘Kalam’, cursive;
+font-size: 0.95rem;
+color: #4e342e;
+display: inline-block;
+max-width: 100%;
+}
+.formula-box::before { content: ’✏ ’; }
+
+.imp-box {
+background: #ffebee;
+border: 1.5px dashed #e53935;
+border-radius: 6px;
+padding: 8px 12px;
+margin: 8px 0;
+font-family: ‘Patrick Hand’, cursive;
+font-size: 0.92rem;
+color: #b71c1c;
+}
+.imp-box::before { content: ’⚠ IMP: ’; font-weight: bold; }
+
+.remember-box {
+background: #e8f5e9;
+border: 1.5px solid #43a047;
+border-radius: 6px;
+padding: 8px 12px;
+margin: 8px 0;
+font-family: ‘Patrick Hand’, cursive;
+font-size: 0.92rem;
+color: #1b5e20;
+}
+.remember-box::before { content: ’★ Remember: ’; font-weight: bold; }
+
+.sticky-note {
+background: #fff59d;
+border: 1px solid #f9a825;
+transform: rotate(-1.5deg);
+padding: 10px 14px;
+margin: 12px 0 12px 12px;
+float: right;
+max-width: 220px;
+font-family: ‘Kalam’, cursive;
+font-size: 0.88rem;
+color: #4e342e;
+box-shadow: 3px 3px 8px rgba(0,0,0,0.15);
+border-radius: 2px;
+line-height: 1.6;
+}
+.sticky-note::before { content: ’📌 ’; }
+.clearfix::after { content: ‘’; display: table; clear: both; }
+
+/* –– MCQ SECTION –– */
+.mcq-container { padding: 16px 24px 32px 88px; position: relative; z-index: 2; }
+
+.mcq-header {
+background: #283593;
+color: white;
+padding: 16px 24px 16px 88px;
+border-bottom: 3px solid #1a237e;
+position: relative; z-index: 2;
+}
+.mcq-header h2 { font-family: ‘Caveat’, cursive; font-size: 1.8rem; }
+
+.exam-info {
+display: flex; gap: 16px; flex-wrap: wrap;
+background: #e8eaf6; border: 1px solid #9fa8da;
+border-radius: 6px; padding: 12px; margin-bottom: 20px;
+font-family: ‘Patrick Hand’, cursive; font-size: 0.92rem;
+}
+.exam-info span { color: #283593; font-weight: 600; }
+
+.question-block { margin-bottom: 20px; }
+.q-num {
+font-family: ‘Caveat’, cursive;
+font-size: 1.1rem;
+color: var(–red);
+font-weight: 700;
+}
+.q-text {
+font-family: ‘Kalam’, cursive;
+font-size: 0.97rem;
+color: var(–ink);
+margin: 4px 0 8px 0;
+line-height: 1.7;
+}
+.options { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; }
+.option {
+font-family: ‘Patrick Hand’, cursive;
+font-size: 0.9rem;
+color: #333;
+padding: 3px 0;
+}
+.option.correct { color: var(–green); font-weight: 700; }
+.option.correct::after { content: ’ ✓’; }
+.show-answer-btn {
+background: none; border: 1px dashed #1565c0; color: #1565c0;
+font-family: ‘Kalam’, cursive; font-size: 0.8rem;
+padding: 2px 8px; border-radius: 4px; cursor: pointer; margin-top: 6px;
+}
+.show-answer-btn:hover { background: #e3f2fd; }
+.answer-row { display: none; }
+.answer-row.visible { display: block; }
+.answer-text {
+font-family: ‘Patrick Hand’, cursive;
+font-size: 0.85rem;
+color: var(–green);
+margin-top: 4px;
+padding: 4px 8px;
+background: #e8f5e9;
+border-radius: 4px;
+display: inline-block;
+}
+
+hr.page-rule {
+border: none; border-top: 2px dashed #ccc;
+margin: 24px 0;
+}
+
+.unit-sep {
+font-family: ‘Caveat’, cursive;
+font-size: 1rem;
+color: #888;
+text-align: center;
+margin: 10px 0 20px;
+letter-spacing: 2px;
+}
+
+/* scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #5d4037; }
+::-webkit-scrollbar-thumb { background: #f57f17; border-radius: 3px; }
+
+@media (max-width: 600px) {
+.page-content, .mcq-container { padding-left: 16px; }
+.notebook::after { display: none; }
+.options { grid-template-columns: 1fr; }
+.sticky-note { float: none; max-width: 100%; transform: none; }
+}
+</style>
+
+</head>
+<body>
+
+<div class="top-nav">
+  <div>
+    <h1>📚 UK Lecturer – Physics Notes</h1>
+    <span>Uttarakhand Lecturer Exam | Paper I &amp; II | Categorised: 11th / 12th / UG-PG</span>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showTab('p1-notes')">📝 Paper I Notes</button>
+    <button class="nav-tab" onclick="showTab('p2-notes')">📝 Paper II Notes</button>
+    <button class="nav-tab" onclick="showTab('p1-mcq')">❓ Paper I MCQ</button>
+    <button class="nav-tab" onclick="showTab('p2-mcq')">❓ Paper II MCQ</button>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ============================================================ -->
+
+<!--  PAPER I  NOTES                                              -->
+
+<!-- ============================================================ -->
+
+<div class="notebook active" id="p1-notes">
+  <div class="page-header">
+    <h2>📖 PAPER – FIRST &nbsp;|&nbsp; Physics Notes</h2>
+    <div class="subtitle">150 Questions · 3 Hours &nbsp;|&nbsp; <span style="background:#fff3;padding:2px 8px;border-radius:4px;">🟢 11th &nbsp; 🔵 12th &nbsp; 🟣 UG-PG</span></div>
+  </div>
+  <div class="page-content">
+
+```
+<!-- UNIT I -->
+<div class="unit-block">
+  <div class="unit-title">
+    Unit I : Kinematics
+    <span class="unit-badge badge-11">11th Class</span>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name"><span class="arrow">→</span>Frame of Reference & Motion in a Straight Line</div>
+    <div class="note-line">A frame of reference is a coordinate system used to describe the position of objects.</div>
+    <div class="note-line">Uniform motion: equal displacement in equal intervals of time → velocity = constant.</div>
+    <div class="note-line">Non-uniform motion: velocity changes with time (acceleration ≠ 0).</div>
+    <div class="formula-box">v = u + at &nbsp;|&nbsp; s = ut + ½at² &nbsp;|&nbsp; v² = u² + 2as</div>
+    <div class="note-line">v-t graph: slope = acceleration; area under curve = displacement.</div>
+    <div class="note-line">x-t graph: slope = velocity; straight line → uniform motion.</div>
+    <div class="imp-box">Equations of motion valid only for constant acceleration.</div>
+  </div>
+
+  <div class="topic-card green">
+    <div class="topic-name"><span class="arrow">→</span>Vectors & Scalars</div>
+    <div class="sticky-note">Unit vector: magnitude = 1<br>î, ĵ, k̂ along x, y, z axes<br>â = A⃗ / |A|</div>
+    <div class="note-line">Scalar: magnitude only (mass, speed, temperature, energy).</div>
+    <div class="note-line">Vector: magnitude + direction (displacement, velocity, force, acceleration).</div>
+    <div class="note-line">Relative velocity: V⃗_AB = V⃗_A − V⃗_B</div>
+    <div class="formula-box">Resolution: Aₓ = A cosθ, Aᵧ = A sinθ</div>
+    <div class="note-line">Triangle law / Parallelogram law for vector addition.</div>
+    <div class="remember-box">Dot product A⃗·B⃗ = AB cosθ (scalar); Cross product A⃗×B⃗ = AB sinθ n̂ (vector)</div>
+    <div style="clear:both"></div>
+  </div>
+
+  <div class="topic-card accent">
+    <div class="topic-name"><span class="arrow">→</span>Projectile Motion & Uniform Circular Motion</div>
+    <div class="note-line">Projectile: horizontal → uniform motion; vertical → uniformly accelerated.</div>
+    <div class="formula-box">Range R = u²sin2θ/g &nbsp;|&nbsp; Max height H = u²sin²θ/2g &nbsp;|&nbsp; T = 2u sinθ/g</div>
+    <div class="note-line">Maximum range at θ = 45°.</div>
+    <div class="note-line">UCM: speed constant, velocity changes direction → centripetal acceleration.</div>
+    <div class="formula-box">a_c = v²/r = ω²r &nbsp;|&nbsp; F_c = mv²/r</div>
+    <div class="imp-box">Centripetal force is directed towards centre; it is NOT a new force but provided by friction/tension/gravity.</div>
+  </div>
+</div>
+
+<hr class="page-rule">
+
+<!-- UNIT II -->
+<div class="unit-block">
+  <div class="unit-title">Unit II : Laws of Motion <span class="unit-badge badge-11">11th Class</span></div>
+
+  <div class="topic-card red">
+    <div class="topic-name"><span class="arrow">→</span>Newton's Laws</div>
+    <div class="note-line">1st Law (Inertia): Body remains at rest or uniform motion unless external force acts.</div>
+    <div class="note-line">2nd Law: F⃗ = ma⃗ = dp⃗/dt (net force = rate of change of momentum).</div>
+    <div class="note-line">3rd Law: Every action has equal and opposite reaction (different bodies).</div>
+    <div class="formula-box">Impulse J = FΔt = Δp = m(v−u)</div>
+    <div class="note-line">Conservation of Linear Momentum: If ΣF_ext = 0, total momentum conserved.</div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name"><span class="arrow">→</span>Friction</div>
+    <div class="note-line">Static friction (f_s): acts on stationary body; f_s ≤ μ_s N</div>
+    <div class="note-line">Kinetic friction (f_k): acts on moving body; f_k = μ_k N (μ_k &lt; μ_s)</div>
+    <div class="note-line">Rolling friction &lt;&lt; kinetic friction (that's why wheels are used!)</div>
+    <div class="formula-box">Angle of friction: tanλ = μ &nbsp;|&nbsp; Angle of repose: tanθ = μ</div>
+    <div class="remember-box">Friction is self-adjusting up to limiting value (static friction).</div>
+  </div>
+
+  <div class="topic-card green">
+    <div class="topic-name"><span class="arrow">→</span>Dynamics of Circular Motion</div>
+    <div class="note-line">Banking of roads: tanθ = v²/rg (no friction needed at this speed).</div>
+    <div class="note-line">Conical pendulum: T cosθ = mg; T sinθ = mω²r</div>
+    <div class="formula-box">v_max (banked) = √(rg·tan(θ+λ)) where λ = friction angle</div>
+    <div class="note-line">At top of vertical circle: v_min = √(gr) (minimum for contact)</div>
+  </div>
+</div>
+
+<hr class="page-rule">
+
+<!-- UNIT III -->
+<div class="unit-block">
+  <div class="unit-title">Unit III : Work, Energy and Power <span class="unit-badge badge-11">11th Class</span></div>
+
+  <div class="topic-card">
+    <div class="note-line">Work W = F⃗·d⃗ = Fd cosθ (scalar); negative when θ &gt; 90°</div>
+    <div class="formula-box">Kinetic Energy KE = ½mv² &nbsp;|&nbsp; Work-Energy theorem: W_net = ΔKE</div>
+    <div class="note-line">Conservative force: work done is path-independent (gravity, spring force).</div>
+    <div class="note-line">Non-conservative: work is path-dependent (friction, air resistance).</div>
+    <div class="formula-box">PE of spring = ½kx² &nbsp;|&nbsp; Conservation: KE + PE = constant (conservative forces)</div>
+    <div class="note-line">Power P = W/t = Fv cosθ; SI unit: Watt (1 hp = 746 W)</div>
+    <div class="imp-box">Elastic collision: KE conserved. Inelastic: KE not conserved. Perfectly inelastic: bodies stick together.</div>
+    <div class="formula-box">e = (v₂−v₁)/(u₁−u₂) — coefficient of restitution (0 ≤ e ≤ 1)</div>
+  </div>
+</div>
+
+<hr class="page-rule">
+
+<!-- UNIT IV -->
+<div class="unit-block">
+  <div class="unit-title">Unit IV : Classical Mechanics <span class="unit-badge badge-ug">UG–PG Level</span></div>
+
+  <div class="topic-card purple">
+    <div class="topic-name"><span class="arrow">→</span>D'Alembert's Principle & Lagrangian Mechanics</div>
+    <div class="note-line">D'Alembert: (F − ma)·δr = 0 → transforms dynamics into statics using virtual work.</div>
+    <div class="formula-box">Lagrangian L = T − V; Euler-Lagrange: d/dt(∂L/∂q̇ᵢ) − ∂L/∂qᵢ = 0</div>
+    <div class="note-line">Generalised coordinates qᵢ describe system with constraints.</div>
+    <div class="note-line">Cyclic coordinate: ∂L/∂qᵢ = 0 → corresponding canonical momentum pᵢ is conserved.</div>
+    <div class="note-line">Canonical momentum: pᵢ = ∂L/∂q̇ᵢ</div>
+  </div>
+
+  <div class="topic-card purple">
+    <div class="topic-name"><span class="arrow">→</span>Hamiltonian Mechanics & Poisson Brackets</div>
+    <div class="formula-box">H = Σpᵢq̇ᵢ − L = T + V (for conservative systems)</div>
+    <div class="note-line">Hamilton's equations: q̇ᵢ = ∂H/∂pᵢ; ṗᵢ = −∂H/∂qᵢ</div>
+    <div class="formula-box">Poisson Bracket: {f,g} = Σ(∂f/∂qᵢ·∂g/∂pᵢ − ∂f/∂pᵢ·∂g/∂qᵢ)</div>
+    <div class="note-line">Fundamental PBs: {qᵢ,pⱼ} = δᵢⱼ; {qᵢ,qⱼ} = 0; {pᵢ,pⱼ} = 0</div>
+    <div class="imp-box">Hamilton-Jacobi equation: H(qᵢ, ∂S/∂qᵢ, t) + ∂S/∂t = 0</div>
+  </div>
+
+  <div class="topic-card purple">
+    <div class="topic-name"><span class="arrow">→</span>Central Force & Kepler's Laws</div>
+    <div class="note-line">Central force: F = f(r) r̂ — always directed along line joining bodies.</div>
+    <div class="note-line">Angular momentum L conserved → motion in a plane.</div>
+    <div class="note-line">Kepler's Laws: (1) Elliptical orbits; (2) Equal areas in equal times (L conserved); (3) T² ∝ a³</div>
+    <div class="formula-box">Kepler's 3rd: T² = (4π²/GM) a³</div>
+  </div>
+
+  <div class="topic-card purple">
+    <div class="topic-name"><span class="arrow">→</span>Special Theory of Relativity</div>
+    <div class="note-line">Postulates: (1) Laws of physics same in all inertial frames; (2) Speed of light c is constant.</div>
+    <div class="formula-box">Lorentz factor: γ = 1/√(1−v²/c²)</div>
+    <div class="note-line">Time dilation: Δt = γΔt₀ (moving clock runs slow)</div>
+    <div class="note-line">Length contraction: L = L₀/γ (moving rod is shorter)</div>
+    <div class="formula-box">Mass-energy equivalence: E = mc² &nbsp;|&nbsp; E² = (pc)² + (m₀c²)²</div>
+    <div class="note-line">Relativistic momentum: p = γm₀v</div>
+    <div class="imp-box">Relativistic velocity addition: u' = (u−v)/(1−uv/c²)</div>
+  </div>
+</div>
+
+<hr class="page-rule">
+
+<!-- UNIT V -->
+<div class="unit-block">
+  <div class="unit-title">Unit V : Oscillations and Waves <span class="unit-badge badge-11">11th / 12th</span></div>
+
+  <div class="topic-card accent">
+    <div class="topic-name"><span class="arrow">→</span>Simple Harmonic Motion (SHM)</div>
+    <div class="note-line">SHM: restoring force ∝ −displacement; F = −kx → a = −ω²x</div>
+    <div class="formula-box">x = A sin(ωt + φ) &nbsp;|&nbsp; ω = √(k/m) &nbsp;|&nbsp; T = 2π/ω = 2π√(m/k)</div>
+    <div class="note-line">Energy in SHM: KE = ½mω²(A²−x²); PE = ½mω²x²; Total E = ½mω²A² (constant)</div>
+    <div class="note-line">Simple pendulum: T = 2π√(L/g) (valid for small angles)</div>
+    <div class="note-line">Spring-mass: Series: 1/k_eff = 1/k₁ + 1/k₂; Parallel: k_eff = k₁ + k₂</div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name"><span class="arrow">→</span>Damped, Forced Oscillations & Resonance</div>
+    <div class="formula-box">Damped: d²x/dt² + 2β dx/dt + ω₀²x = 0; x = Ae^(−βt)cos(ω't+φ)</div>
+    <div class="note-line">Underdamped (β &lt; ω₀): oscillates with decreasing amplitude.</div>
+    <div class="note-line">Overdamped: no oscillation, slow return. Critically damped: fastest return without oscillation.</div>
+    <div class="note-line">Resonance: when driving frequency = natural frequency → maximum amplitude.</div>
+    <div class="note-line">Quality factor Q = ω₀/2β (sharpness of resonance)</div>
+  </div>
+
+  <div class="topic-card green">
+    <div class="topic-name"><span class="arrow">→</span>Waves</div>
+    <div class="note-line">Transverse waves: displacement ⊥ propagation (light, string). Longitudinal: displacement ∥ propagation (sound).</div>
+    <div class="formula-box">v = fλ &nbsp;|&nbsp; y = A sin(kx − ωt) &nbsp;|&nbsp; k = 2π/λ, ω = 2πf</div>
+    <div class="note-line">Standing waves: y = 2A sin(kx) cos(ωt) — nodes (zero amplitude), antinodes (max amplitude).</div>
+    <div class="note-line">String: f_n = n/2L · √(T/μ); Organ pipe (closed): f_n = (2n−1)v/4L</div>
+    <div class="formula-box">Doppler: f' = f(v ± v_o)/(v ∓ v_s)</div>
+    <div class="note-line">Beats: f_beat = |f₁ − f₂| (heard as periodic variation in loudness)</div>
+    <div class="imp-box">Superposition principle: resultant = algebraic sum of individual displacements.</div>
+  </div>
+</div>
+
+<hr class="page-rule">
+
+<!-- UNIT VI -->
+<div class="unit-block">
+  <div class="unit-title">Unit VI : Gravitation <span class="unit-badge badge-11">11th Class</span></div>
+
+  <div class="topic-card brown">
+    <div class="note-line">Newton's Law: F = GMm/r² (attractive, acts along line joining masses)</div>
+    <div class="note-line">g = GM/R² (surface); g_h = g(1 − 2h/R) at height h; g_d = g(1 − d/R) at depth d</div>
+    <div class="formula-box">Gravitational PE = −GMm/r &nbsp;|&nbsp; Escape velocity v_e = √(2GM/R) = √(2gR)</div>
+    <div class="note-line">v_e at Earth = 11.2 km/s</div>
+    <div class="note-line">Orbital velocity: v_o = √(GM/r) = √(gR²/(R+h))</div>
+    <div class="note-line">Geo-stationary orbit: T = 24 h, h ≈ 36,000 km above equator, v_o ≈ 3.07 km/s</div>
+    <div class="formula-box">Kepler's 3rd: T² ∝ r³ → T² = (4π²/GM)r³</div>
+    <div class="remember-box">Gravitational potential V = −GM/r (negative, zero at infinity)</div>
+  </div>
+</div>
+
+<hr class="page-rule">
+
+<!-- UNIT VII -->
+<div class="unit-block">
+  <div class="unit-title">Unit VII : Electrostatics <span class="unit-badge badge-12">12th Class</span></div>
+
+  <div class="topic-card red">
+    <div class="topic-name"><span class="arrow">→</span>Coulomb's Law & Electric Field</div>
+    <div class="formula-box">F = kq₁q₂/r² &nbsp;|&nbsp; k = 1/4πε₀ = 9×10⁹ Nm²/C²</div>
+    <div class="note-line">Electric field E = F/q₀ = kq/r² (due to point charge)</div>
+    <div class="note-line">Electric flux Φ = E⃗·A⃗ = EA cosθ</div>
+    <div class="formula-box">Gauss's Law: Φ = Σq_enc/ε₀</div>
+    <div class="note-line">Applications: infinite sheet → E = σ/2ε₀; sphere → E = kQ/r² (outside)</div>
+    <div class="note-line">Dipole: p = qd; E along axis = 2kp/r³; E along equator = kp/r³</div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-name"><span class="arrow">→</span>Electric Potential & Capacitance</div>
+    <div class="formula-box">V = kq/r &nbsp;|&nbsp; E = −dV/dr &nbsp;|&nbsp; W = q(V_A − V_B)</div>
+    <div class="note-line">Equipotential surfaces: perpendicular to field lines, no work done moving along them.</div>
+    <div class="note-line">Capacitance C = Q/V; Parallel plate: C = ε₀A/d; with dielectric: C = κε₀A/d</div>
+    <div class="formula-box">Energy in capacitor: U = Q²/2C = ½CV² = QV/2</div>
+    <div class="note-line">Series: 1/C_eq = Σ1/Cᵢ; Parallel: C_eq = ΣCᵢ</div>
+    <div class="note-line">Van de Graaff generator: builds high static potential using conveyor belt.</div>
+  </div>
+</div>
+
+<hr class="page-rule">
+
+<!-- UNIT VIII -->
+<div class="unit-block">
+  <div class="unit-title">Unit VIII : Electric Conduction <span class="unit-badge badge-12">12th Class</span></div>
+  <div class="topic-card">
+    <div class="formula-box">Drift velocity v_d = eE τ/m &nbsp;|&nbsp; I = nev_dA &nbsp;|&nbsp; J = σE = E/ρ</div>
+    <div class="note-line">Mobility μ = v_d/E = eτ/m</div>
+    <div class="note-line">Resistivity ρ = ρ₀(1 + αΔT) — increases with temperature for metals</div>
+    <div class="note-line">Ohm's Law: V = IR; Power P = VI = I²R = V²/R</div>
+    <div class="formula-box">Kirchhoff's: Junction rule ΣI = 0; Loop rule ΣV = 0</div>
+    <div class="note-line">Wiedemann-Franz Law: K/σT = L (Lorenz number, constant for metals)</div>
+    <div class="note-line">Colour code for resistors: B B ROY Great Britain Very Good Wife (Black, Brown, Red, Orange, Yellow, Green, Blue, Violet, Grey, White → 0–9)</div>
+  </div>
+</div>
+
+<hr class="page-rule">
+
+<!-- UNIT IX -->
+<div class="unit-block">
+  <div class="unit-title">Unit IX : Magnetic Effects of Current &amp; Magnetism <span class="unit-badge badge-12">12th Class</span></div>
+  <div class="topic-card">
+    <div class="formula-box">Biot-Savart: dB = μ₀/4π · Idl sinθ/r²</div>
+    <div class="note-line">Ampere's Law: ∮B⃗·dl⃗ = μ₀I_enc</div>
+    <div class="note-line">Force on moving charge: F = qv×B (Lorentz force)</div>
+    <div class="note-line">Cyclotron: r = mv/qB; frequency f = qB/2πm (independent of speed)</div>
+    <div class="note-line">Force between parallel wires: F/L = μ₀I₁I₂/2πd (attractive if same direction)</div>
+    <div class="formula-box">Torque on loop: τ = NIAB sinθ = M×B</div>
+    <div class="note-line">Moving coil galvanometer: θ = NIAB/k; converted to ammeter by low shunt, voltmeter by high series R.</div>
+    <div class="imp-box">Para (χ &gt; 0, weak), Dia (χ &lt; 0), Ferro (χ &gt;&gt; 0) — know examples!</div>
+  </div>
+</div>
+
+<hr class="page-rule">
+
+<!-- UNIT X -->
+<div class="unit-block">
+  <div class="unit-title">Unit X : EM Induction &amp; Alternating Currents <span class="unit-badge badge-12">12th Class</span></div>
+  <div class="topic-card green">
+    <div class="formula-box">Faraday: ε = −dΦ/dt &nbsp;|&nbsp; Φ = BA cosθ</div>
+    <div class="note-line">Lenz's law: induced current opposes cause (conservation of energy).</div>
+    <div class="note-line">Self inductance: ε = −L dI/dt; energy in inductor U = ½LI²</div>
+    <div class="note-line">Mutual inductance M: ε₂ = −M dI₁/dt; M = k√(L₁L₂)</div>
+    <div class="formula-box">AC: I = I₀ sinωt; V = V₀ sinωt; I_rms = I₀/√2; V_rms = V₀/√2</div>
+    <div class="note-line">X_L = ωL (inductive); X_C = 1/ωC (capacitive); Z = √(R² + (X_L−X_C)²)</div>
+    <div class="formula-box">Resonance in LCR: ω₀ = 1/√(LC); Q = ω₀L/R</div>
+    <div class="note-line">Power factor: cosφ = R/Z; Wattless current: I sinφ (no power dissipation)</div>
+    <div class="note-line">Transformer: V₂/V₁ = N₂/N₁ = I₁/I₂; Eddy currents — losses (laminated core reduces them)</div>
+  </div>
+</div>
+
+<hr class="page-rule">
+
+<!-- UNIT XI -->
+<div class="unit-block">
+  <div class="unit-title">Unit XI : Mathematical Methods of Physics <span class="unit-badge badge-ug">UG–PG Level</span></div>
+  <div class="topic-card purple">
+    <div class="note-line">Vector Calculus: Gradient ∇f, Divergence ∇·F⃗, Curl ∇×F⃗</div>
+    <div class="formula-box">Gauss's theorem: ∮F⃗·dA⃗ = ∫∇·F⃗ dV &nbsp;|&nbsp; Stokes: ∮F⃗·dl⃗ = ∫(∇×F⃗)·dA⃗</div>
+    <div class="note-line">Matrices: Orthogonal (AᵀA = I), Unitary (A†A = I), Hermitian (A† = A)</div>
+    <div class="note-line">Eigenvalue equation: Ax = λx; det(A−λI) = 0</div>
+    <div class="note-line">Special functions: Legendre (P_n), Bessel (J_n), Hermite (H_n), Laguerre (L_n) — arise in wave equations</div>
+    <div class="formula-box">Tensors: covariant (lower index), contravariant (upper index), mixed. Metric tensor g_μν</div>
+    <div class="note-line">Christoffel symbol Γᵅ_μν — connection coefficients; Ricci tensor R_μν — curvature</div>
+    <div class="note-line">Epsilon tensor ε_ijk: completely antisymmetric, ε₁₂₃ = 1; used in cross products</div>
+  </div>
+</div>
+```
+
+  </div><!-- page-content -->
+</div><!-- notebook p1-notes -->
+
+<!-- ============================================================ -->
+
+<!--  PAPER II  NOTES                                             -->
+
+<!-- ============================================================ -->
+
+<div class="notebook" id="p2-notes">
+  <div class="page-header">
+    <h2>📖 PAPER – SECOND &nbsp;|&nbsp; Physics Notes</h2>
+    <div class="subtitle">150 Questions · 3 Hours &nbsp;|&nbsp; Modern Physics, Optics, Thermodynamics &amp; More</div>
+  </div>
+  <div class="page-content">
+
+```
+<!-- UNIT I -->
+<div class="unit-block">
+  <div class="unit-title">Unit I : Electromagnetic Waves <span class="unit-badge badge-12">12th / UG</span></div>
+  <div class="topic-card red">
+    <div class="note-line">Displacement current: I_d = ε₀ dΦ_E/dt (Maxwell's correction to Ampere's law)</div>
+    <div class="formula-box">Maxwell's equations (free space): ∇·E = 0; ∇·B = 0; ∇×E = −∂B/∂t; ∇×B = μ₀ε₀∂E/∂t</div>
+    <div class="note-line">EM wave speed: c = 1/√(μ₀ε₀) = 3×10⁸ m/s</div>
+    <div class="note-line">Transverse nature: E⃗ and B⃗ perpendicular to each other and to direction of propagation.</div>
+    <div class="note-line">Poynting vector S⃗ = (E⃗×B⃗)/μ₀ — energy flux (power per unit area)</div>
+    <div class="formula-box">In medium: v = c/n; n = √(εᵣμᵣ)</div>
+    <div class="note-line">EM spectrum: Radio → Microwave → IR → Visible → UV → X-ray → Gamma</div>
+    <div class="note-line">Gauge invariance: physics unchanged by gauge transformation of potentials.</div>
+  </div>
+</div>
+
+<hr class="page-rule">
+
+<!-- UNIT II -->
+<div class="unit-block">
+  <div class="unit-title">Unit II : Optics <span class="unit-badge badge-12">12th / UG</span></div>
+  <div class="topic-card">
+    <div class="topic-name"><span class="arrow">→</span>Geometrical Optics</div>
+    <div class="formula-box">Mirror: 1/f = 1/v + 1/u; m = −v/u</div>
+    <div class="formula-box">Refraction: n₁ sinθ₁ = n₂ sinθ₂ (Snell's law); n = c/v</div>
+    <div class="note-line">Total internal reflection: sinθ_c = n₂/n₁; optical fibres use TIR.</div>
+    <div class="formula-box">Lens: 1/f = (n−1)(1/R₁ − 1/R₂) &nbsp;|&nbsp; 1/v − 1/u = 1/f</div>
+    <div class="note-line">Lensmaker's formula; power P = 1/f(m) in dioptres; combination P = P₁+P₂</div>
+    <div class="note-line">Dispersion: different wavelengths refract by different amounts → prism separates colours.</div>
+    <div class="note-line">Scattering: Rayleigh → λ⁻⁴ → blue sky, red sunset (large λ scattered less).</div>
+  </div>
+  <div class="topic-card green">
+    <div class="topic-name"><span class="arrow">→</span>Wave Optics</div>
+    <div class="note-line">Huygens' principle: every point on wavefront is source of secondary wavelets.</div>
+    <div class="formula-box">Young's double slit: fringe width β = λD/d; path diff = d sinθ</div>
+    <div class="note-line">Coherent sources needed for sustained interference.</div>
+    <div class="formula-box">Single slit diffraction: minima at a sinθ = nλ; central max width = 2λ/a</div>
+    <div class="note-line">Resolving power of telescope: θ_min = 1.22λ/D; Microscope: RP = 2n sinα/λ</div>
+    <div class="note-line">Polarisation: Malus's law I = I₀cos²θ; Brewster's angle tan θ_B = n</div>
+  </div>
+</div>
+
+<hr class="page-rule">
+
+<!-- UNIT III -->
+<div class="unit-block">
+  <div class="unit-title">Unit III : Thermodynamics <span class="unit-badge badge-12">12th / UG</span></div>
+  <div class="topic-card accent">
+    <div class="note-line">Zeroth Law: Thermal equilibrium defines temperature.</div>
+    <div class="note-line">First Law: dU = dQ − dW; energy conservation; dW = PdV</div>
+    <div class="note-line">Second Law: (Kelvin-Planck) no engine converts all heat to work; (Clausius) heat flows hot→cold naturally.</div>
+    <div class="formula-box">Carnot efficiency: η = 1 − T_L/T_H; COP (refrigerator) = T_L/(T_H−T_L)</div>
+    <div class="note-line">Entropy: dS = dQ_rev/T; S increases (or stays same) for isolated system.</div>
+    <div class="note-line">Third Law: Entropy → 0 as T → 0 K (Nernst theorem).</div>
+    <div class="imp-box">Reversible process: quasi-static + no friction. All actual processes are irreversible.</div>
+  </div>
+</div>
+
+<hr class="page-rule">
+
+<!-- UNIT IV -->
+<div class="unit-block">
+  <div class="unit-title">Unit IV : Behaviour of Perfect Gas &amp; Kinetic Theory <span class="unit-badge badge-12">12th</span></div>
+  <div class="topic-card brown">
+    <div class="formula-box">Ideal gas: PV = nRT = NkT &nbsp;|&nbsp; k = 1.38×10⁻²³ J/K</div>
+    <div class="note-line">Pressure of gas: P = ⅓ρ&lt;v²&gt; = ⅓(nm)&lt;v²&gt;</div>
+    <div class="formula-box">KE per molecule: ½m&lt;v²&gt; = (3/2)kT &nbsp;|&nbsp; v_rms = √(3RT/M)</div>
+    <div class="note-line">v_mp = √(2RT/M) &lt; v_avg = √(8RT/πM) &lt; v_rms = √(3RT/M)</div>
+    <div class="note-line">Degrees of freedom f: mono = 3, diatomic = 5 (at normal T), non-linear triatomic = 6</div>
+    <div class="formula-box">Law of equipartition: energy = ½kT per degree of freedom → U = (f/2)nRT</div>
+    <div class="note-line">Mean free path: l = 1/(√2 πd²n)</div>
+  </div>
+</div>
+
+<hr class="page-rule">
+
+<!-- UNIT V -->
+<div class="unit-block">
+  <div class="unit-title">Unit V : Dual Nature of Matter &amp; Radiation <span class="unit-badge badge-12">12th / UG</span></div>
+  <div class="topic-card purple">
+    <div class="note-line">Photoelectric effect: hf = φ + ½mv²_max; threshold ν₀ = φ/h</div>
+    <div class="formula-box">Photon: E = hν = hc/λ; p = h/λ; Einstein explained PE effect (Nobel 1921)</div>
+    <div class="note-line">de Broglie wavelength: λ = h/mv = h/p</div>
+    <div class="note-line">Davisson-Germer experiment: confirmed wave nature of electrons by diffraction.</div>
+    <div class="note-line">Heisenberg's uncertainty: ΔxΔp ≥ ℏ/2; ΔEΔt ≥ ℏ/2</div>
+    <div class="formula-box">Schrödinger (time-indep): −ℏ²/2m ∇²ψ + Vψ = Eψ</div>
+    <div class="note-line">Wave function ψ: |ψ|² = probability density; ∫|ψ|²dV = 1 (normalisation)</div>
+    <div class="note-line">Particle in a box: Eₙ = n²π²ℏ²/2mL²; ψₙ = √(2/L) sin(nπx/L)</div>
+    <div class="imp-box">Compton scattering: Δλ = (h/m₀c)(1−cosθ) — confirms photon momentum.</div>
+  </div>
+</div>
+
+<hr class="page-rule">
+
+<!-- UNIT VI -->
+<div class="unit-block">
+  <div class="unit-title">Unit VI : Atoms and Nuclei <span class="unit-badge badge-12">12th</span></div>
+  <div class="topic-card">
+    <div class="note-line">Rutherford model: nucleus very small, dense, positively charged; electrons orbit.</div>
+    <div class="note-line">Bohr model: electrons in discrete orbits; angular momentum L = nℏ</div>
+    <div class="formula-box">Bohr radius: aₙ = n²a₀ (a₀ = 0.529 Å) &nbsp;|&nbsp; Eₙ = −13.6/n² eV</div>
+    <div class="note-line">Hydrogen spectrum: 1/λ = R_H(1/n₁² − 1/n₂²); Lyman (UV), Balmer (visible), Paschen (IR)</div>
+    <div class="note-line">Nuclear: A = mass number, Z = atomic number; r = r₀A^(1/3); r₀ = 1.2 fm</div>
+    <div class="note-line">Binding energy: BE = Δm × 931.5 MeV; BE/A peaks near Fe-56.</div>
+    <div class="formula-box">Radioactive decay: N = N₀e^(−λt); t₁/₂ = 0.693/λ</div>
+    <div class="note-line">Nuclear fission (heavy→light + energy); fusion (light→heavy + energy). Both release energy due to BE/A.</div>
+    <div class="note-line">Chain reaction: k &gt; 1 (supercritical, bomb); k = 1 (reactor)</div>
+  </div>
+</div>
+
+<hr class="page-rule">
+
+<!-- UNIT VII -->
+<div class="unit-block">
+  <div class="unit-title">Unit VII : Atomic and Molecular Physics <span class="unit-badge badge-ug">UG–PG Level</span></div>
+  <div class="topic-card purple">
+    <div class="note-line">Quantum numbers: n (principal), l (azimuthal), m_l (magnetic), m_s (spin ±½)</div>
+    <div class="note-line">Pauli exclusion principle: no two electrons can have identical set of all 4 quantum numbers.</div>
+    <div class="note-line">Hund's rule: maximise S, then L before pairing electrons in subshell.</div>
+    <div class="note-line">Stern-Gerlach: confirms space quantisation of magnetic moment.</div>
+    <div class="note-line">Zeeman effect: spectral lines split in magnetic field (normal: 3 lines; anomalous: more).</div>
+    <div class="note-line">Stark effect: spectral lines split in electric field.</div>
+    <div class="note-line">Lasers: LASER = Light Amplification by Stimulated Emission of Radiation</div>
+    <div class="formula-box">Einstein A &amp; B coefficients: A₂₁ = spontaneous emission rate; B₂₁ = stimulated emission rate</div>
+    <div class="note-line">Population inversion needed for lasing; achieved by optical pumping, 3- or 4-level system.</div>
+    <div class="note-line">Coherence length L_c = c·τ_c; Mode of resonator: L = mλ/2</div>
+  </div>
+</div>
+
+<hr class="page-rule">
+
+<!-- UNIT VIII -->
+<div class="unit-block">
+  <div class="unit-title">Unit VIII : Nuclear and Particle Physics <span class="unit-badge badge-ug">UG–PG Level</span></div>
+  <div class="topic-card red">
+    <div class="note-line">Nuclear force: short range (~2 fm), charge independent, saturating, very strong.</div>
+    <div class="note-line">Semi-empirical mass formula (Bethe-Weizsäcker): volume, surface, Coulomb, asymmetry, pairing terms.</div>
+    <div class="note-line">Liquid drop model: nucleus like liquid drop; explains fission.</div>
+    <div class="note-line">Particle accelerators: cyclotron, synchrotron, linear accelerator.</div>
+    <div class="note-line">Elementary particles: quarks (up, down, charm, strange, top, bottom), leptons (e, μ, τ, neutrinos).</div>
+    <div class="note-line">Fundamental interactions: strong, electromagnetic, weak, gravitational.</div>
+    <div class="note-line">Conservation laws: B (baryon), L (lepton), charge, energy-momentum, parity (not in weak).</div>
+    <div class="formula-box">Gell-Mann–Nishijima: Q = I₃ + (B+S)/2 &nbsp;|&nbsp; Quark model: proton = uud, neutron = udd</div>
+  </div>
+</div>
+
+<hr class="page-rule">
+
+<!-- UNIT IX -->
+<div class="unit-block">
+  <div class="unit-title">Unit IX : Electronic Devices <span class="unit-badge badge-12">12th / UG</span></div>
+  <div class="topic-card accent">
+    <div class="note-line">Semiconductors: intrinsic (pure Si/Ge); extrinsic (n-type: pentavalent dopant; p-type: trivalent dopant)</div>
+    <div class="note-line">p-n junction diode: forward bias → conducts; reverse bias → very small current (reverse saturation)</div>
+    <div class="note-line">Zener diode: operates in breakdown → used as voltage regulator</div>
+    <div class="note-line">LED: light emitted during recombination; Solar cell: photovoltaic effect; Photodiode: reverse biased, photocurrent</div>
+    <div class="note-line">Transistor (BJT): NPN/PNP; α = I_C/I_E; β = I_C/I_B; β = α/(1−α)</div>
+    <div class="note-line">Transistor as amplifier: common emitter; V_o/V_i = −β(R_C/R_in)</div>
+    <div class="formula-box">Logic gates: AND, OR, NOT, NAND*, NOR* (*universal gates)</div>
+    <div class="note-line">De Morgan's: (A+B)' = A'B'; (AB)' = A'+B'</div>
+    <div class="note-line">Number systems: Binary↔Decimal↔Octal↔Hexadecimal; BCD; Gray code</div>
+    <div class="note-line">Operational amplifier: ideal (∞ gain, ∞ input R, 0 output R); inverting amp gain = −R_f/R_in</div>
+  </div>
+</div>
+
+<hr class="page-rule">
+
+<!-- UNIT X -->
+<div class="unit-block">
+  <div class="unit-title">Unit X : Communication Systems <span class="unit-badge badge-12">12th</span></div>
+  <div class="topic-card brown">
+    <div class="note-line">Modulation: AM (amplitude), FM (frequency), PM (phase)</div>
+    <div class="note-line">AM: sidebands at f_c ± f_m; bandwidth = 2f_m; less noise immunity than FM</div>
+    <div class="note-line">Propagation: ground wave (&lt;2 MHz), sky wave (HF, ionosphere reflection), space wave (VHF+, line of sight)</div>
+    <div class="formula-box">Range of TV tower: d = √(2Rh) where R = earth radius</div>
+    <div class="note-line">Internet, WWW, LAN; bandwidth, repeaters, amplifiers in communication links</div>
+  </div>
+</div>
+
+<hr class="page-rule">
+
+<!-- UNIT XI -->
+<div class="unit-block">
+  <div class="unit-title">Unit XI : Condensed Matter Physics <span class="unit-badge badge-ug">UG–PG Level</span></div>
+  <div class="topic-card purple">
+    <div class="note-line">Bravais lattices: 14 types; Primitive, BCC, FCC etc.; reciprocal lattice: k-space</div>
+    <div class="note-line">Bragg's law: 2d sinθ = nλ (X-ray diffraction in crystals)</div>
+    <div class="note-line">Phonons: quantised lattice vibrations; acoustic and optical branches.</div>
+    <div class="note-line">Free electron theory: electrons in metal treated as ideal gas → Fermi energy E_F</div>
+    <div class="formula-box">Fermi energy E_F = (ℏ²/2m)(3π²n)^(2/3)</div>
+    <div class="note-line">Band theory: conductor (overlapping bands), insulator (large gap), semiconductor (small gap ~1 eV)</div>
+    <div class="note-line">Drude model: σ = ne²τ/m; thermal conductivity K = (π²/3)(k_B/e)²σT</div>
+    <div class="note-line">Superconductivity: below T_c: zero resistance, Meissner effect (perfect diamagnetism), BCS theory (Cooper pairs)</div>
+    <div class="formula-box">London penetration depth: flux expelled from bulk; Type I (complete) vs Type II (mixed state)</div>
+    <div class="imp-box">High-T_c superconductors (cuprates): T_c above liquid N₂ (77 K) — application in MRI, maglev.</div>
+  </div>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- ============================================================ -->
+
+<!--  PAPER I  MCQ                                                -->
+
+<!-- ============================================================ -->
+
+<div class="notebook" id="p1-mcq">
+  <div class="mcq-header">
+    <h2>❓ PAPER – FIRST &nbsp;|&nbsp; Model MCQ Question Paper</h2>
+  </div>
+  <div class="mcq-container">
+    <div class="exam-info">
+      <span>📋 Total Questions: 150</span>
+      <span>⏱ Time: 3 Hours</span>
+      <span>📌 Shift: Morning (Paper I)</span>
+      <span>✅ All questions carry equal marks</span>
+      <span>❌ Check notification for negative marking</span>
+    </div>
+
+```
+<div class="unit-sep">— Unit I: Kinematics —</div>
+<div id="mcq-p1"></div>
+```
+
+  </div>
+</div>
+
+<!-- ============================================================ -->
+
+<!--  PAPER II  MCQ                                               -->
+
+<!-- ============================================================ -->
+
+<div class="notebook" id="p2-mcq">
+  <div class="mcq-header">
+    <h2>❓ PAPER – SECOND &nbsp;|&nbsp; Model MCQ Question Paper</h2>
+  </div>
+  <div class="mcq-container">
+    <div class="exam-info">
+      <span>📋 Total Questions: 150</span>
+      <span>⏱ Time: 3 Hours</span>
+      <span>📌 Shift: Evening (Paper II)</span>
+      <span>✅ All questions carry equal marks</span>
+    </div>
+    <div id="mcq-p2"></div>
+  </div>
+</div>
+
+</div><!-- container -->
+
+<script>
+// ─── NAV ───────────────────────────────────────────────────────
+function showTab(id) {
+  document.querySelectorAll('.notebook').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ─── MCQ DATA ──────────────────────────────────────────────────
+const p1Questions = [
+  // Unit I – Kinematics
+  { u:"Unit I – Kinematics", q:"A body starts from rest and moves with uniform acceleration a. The distance covered in the nth second is:", opts:["u + a(2n−1)/2","a(2n−1)/2","an²/2","an"], ans:1},
+  { u:"Unit I – Kinematics", q:"The displacement-time graph of a body is a straight line parallel to the time axis. The body is:", opts:["Moving with uniform velocity","At rest","Moving with uniform acceleration","Moving with variable velocity"], ans:1},
+  { u:"Unit I – Kinematics", q:"A projectile is fired at 45° to the horizontal. If the range is R, the maximum height reached is:", opts:["R","R/2","R/4","2R"], ans:2},
+  { u:"Unit I – Kinematics", q:"For a particle in uniform circular motion, which of the following is constant?", opts:["Velocity","Speed","Acceleration","Angular acceleration"], ans:1},
+  { u:"Unit I – Kinematics", q:"A unit vector is one whose:", opts:["Magnitude is zero","Direction is arbitrary","Magnitude is unity","Value is one in all directions"], ans:2},
+  { u:"Unit I – Kinematics", q:"The relative velocity of rain with respect to a man walking is used to determine:", opts:["The actual speed of rain","The angle at which he should hold an umbrella","The wind speed","None of these"], ans:1},
+  { u:"Unit I – Kinematics", q:"Time of flight of a projectile on a horizontal surface is:", opts:["u sinθ/g","2u sinθ/g","u cosθ/g","2u cosθ/g"], ans:1},
+  { u:"Unit I – Kinematics", q:"The v-t graph of a particle moving along a straight line is a straight line of positive slope. This means:", opts:["Uniform velocity","Uniform acceleration","Variable acceleration","Zero acceleration"], ans:1},
+  { u:"Unit I – Kinematics", q:"Which of the following is a scalar quantity?", opts:["Displacement","Force","Speed","Acceleration"], ans:2},
+  { u:"Unit I – Kinematics", q:"The centripetal acceleration of a body moving in a circle of radius r with speed v is:", opts:["v²r","r/v²","v²/r","v/r²"], ans:2},
+  // Unit II – Laws of Motion
+  { u:"Unit II – Laws of Motion", q:"Newton's second law gives:", opts:["Direction of force","Magnitude of force","Definition of force and mass","Relationship F = ma"], ans:3},
+  { u:"Unit II – Laws of Motion", q:"Impulse is equal to:", opts:["Force × time","Change in momentum","Rate of change of momentum","Both A and B"], ans:3},
+  { u:"Unit II – Laws of Motion", q:"The coefficient of kinetic friction is:", opts:["Greater than static friction coefficient","Equal to static friction coefficient","Less than static friction coefficient","Zero"], ans:2},
+  { u:"Unit II – Laws of Motion", q:"In banking of roads, the angle of banking θ satisfies:", opts:["tanθ = v/rg","tanθ = v²/rg","tanθ = rg/v²","tanθ = rg/v"], ans:1},
+  { u:"Unit II – Laws of Motion", q:"At the top of a vertical circular loop, the minimum speed for maintaining contact is:", opts:["√(2gr)","√(gr)","√(3gr)","√(5gr)"], ans:1},
+  { u:"Unit II – Laws of Motion", q:"Angle of friction λ is related to coefficient of friction μ as:", opts:["sinλ = μ","cosλ = μ","tanλ = μ","cotλ = μ"], ans:2},
+  { u:"Unit II – Laws of Motion", q:"When a rocket fires its engine, it accelerates due to:", opts:["Newton's 1st law","Newton's 3rd law","Friction","Gravity"], ans:1},
+  { u:"Unit II – Laws of Motion", q:"A body of mass m is on a rough inclined plane (angle θ). The normal reaction is:", opts:["mg","mg sinθ","mg cosθ","mg tanθ"], ans:2},
+  { u:"Unit II – Laws of Motion", q:"Conservation of linear momentum holds when:", opts:["External force = 0","External force is constant","Internal force = 0","All forces are zero"], ans:0},
+  { u:"Unit II – Laws of Motion", q:"Rolling friction is less than sliding friction because:", opts:["Rolling object is heavier","Contact area is smaller","Rolling motion has no kinetic energy","Rolling involves air resistance"], ans:1},
+  // Unit III – Work, Energy, Power
+  { u:"Unit III – Work, Energy and Power", q:"The work done by a conservative force in a closed loop is:", opts:["Maximum","Minimum","Zero","Positive"], ans:2},
+  { u:"Unit III – Work, Energy and Power", q:"A body of mass m moving with velocity v has kinetic energy:", opts:["mv","mv²","½mv²","2mv²"], ans:2},
+  { u:"Unit III – Work, Energy and Power", q:"In an elastic collision:", opts:["Momentum is conserved","KE is conserved","Both are conserved","Neither is conserved"], ans:2},
+  { u:"Unit III – Work, Energy and Power", q:"The coefficient of restitution e = 1 means:", opts:["Perfectly inelastic collision","Perfectly elastic collision","Partial elastic collision","No collision"], ans:1},
+  { u:"Unit III – Work, Energy and Power", q:"Potential energy stored in a spring compressed by x is:", opts:["kx","kx²","½kx²","2kx²"], ans:2},
+  { u:"Unit III – Work, Energy and Power", q:"1 horse power is equal to:", opts:["1000 W","746 W","500 W","100 W"], ans:1},
+  { u:"Unit III – Work, Energy and Power", q:"Work done by friction is always:", opts:["Positive","Negative","Zero","Variable"], ans:1},
+  { u:"Unit III – Work, Energy and Power", q:"In inelastic collision, which is conserved?", opts:["Kinetic energy","Potential energy","Total momentum","Total mechanical energy"], ans:2},
+  { u:"Unit III – Work, Energy and Power", q:"Power is the:", opts:["Product of force and displacement","Rate of doing work","Work done per unit mass","Force per unit area"], ans:1},
+  { u:"Unit III – Work, Energy and Power", q:"If force and displacement are perpendicular, work done is:", opts:["Maximum","Minimum","Zero","fd"], ans:2},
+  // Unit IV – Classical Mechanics
+  { u:"Unit IV – Classical Mechanics", q:"The Lagrangian of a system is defined as:", opts:["T + V","T − V","V − T","T / V"], ans:1},
+  { u:"Unit IV – Classical Mechanics", q:"If a coordinate is cyclic in the Lagrangian, the corresponding canonical momentum is:", opts:["Zero","Maximum","Conserved","Variable"], ans:2},
+  { u:"Unit IV – Classical Mechanics", q:"D'Alembert's principle involves the concept of:", opts:["Actual force","Virtual work","Potential energy","Kinetic energy"], ans:1},
+  { u:"Unit IV – Classical Mechanics", q:"Hamilton's equation q̇ᵢ = ∂H/∂pᵢ is derived from:", opts:["Lagrange equation","Poisson bracket","Hamilton's principle","Newton's second law"], ans:2},
+  { u:"Unit IV – Classical Mechanics", q:"The fundamental Poisson bracket {qᵢ, pⱼ} is:", opts:["0","1","δᵢⱼ","∞"], ans:2},
+  { u:"Unit IV – Classical Mechanics", q:"In special relativity, the Lorentz factor γ at v = 0.6c is:", opts:["1.25","1.5","2","0.8"], ans:0},
+  { u:"Unit IV – Classical Mechanics", q:"Time dilation implies that:", opts:["Moving clocks run fast","Moving clocks run slow","Stationary clocks stop","Time is absolute"], ans:1},
+  { u:"Unit IV – Classical Mechanics", q:"Mass-energy equivalence is:", opts:["E = mc","E = mc²","E = ½mc²","E = 2mc²"], ans:1},
+  { u:"Unit IV – Classical Mechanics", q:"Kepler's second law is a consequence of conservation of:", opts:["Energy","Linear momentum","Angular momentum","Mass"], ans:2},
+  { u:"Unit IV – Classical Mechanics", q:"Kepler's third law states T² ∝:", opts:["a","a²","a³","a^(1/2)"], ans:2},
+  // Unit V – Oscillations and Waves
+  { u:"Unit V – Oscillations and Waves", q:"The time period of a simple pendulum is doubled when its length is:", opts:["Doubled","Halved","Quadrupled","Made eight times"], ans:2},
+  { u:"Unit V – Oscillations and Waves", q:"In SHM, the total mechanical energy is proportional to:", opts:["A","A²","1/A","1/A²"], ans:1},
+  { u:"Unit V – Oscillations and Waves", q:"At resonance, the amplitude of forced oscillations is:", opts:["Zero","Minimum","Maximum","Equal to natural amplitude"], ans:2},
+  { u:"Unit V – Oscillations and Waves", q:"Quality factor Q represents:", opts:["Energy stored / energy dissipated per cycle","Resonant frequency","Damping constant","None"], ans:0},
+  { u:"Unit V – Oscillations and Waves", q:"The speed of transverse waves on a stretched string depends on:", opts:["Tension and linear density","Amplitude and frequency","Length only","Material density only"], ans:0},
+  { u:"Unit V – Oscillations and Waves", q:"In a closed organ pipe, the fundamental frequency is:", opts:["v/2L","v/4L","v/L","2v/L"], ans:1},
+  { u:"Unit V – Oscillations and Waves", q:"Beats are produced when two sounds have:", opts:["Same frequency","Same amplitude","Slightly different frequencies","Completely different amplitudes"], ans:2},
+  { u:"Unit V – Oscillations and Waves", q:"The Doppler effect applies to:", opts:["Sound waves only","Light waves only","All types of waves","Mechanical waves only"], ans:2},
+  { u:"Unit V – Oscillations and Waves", q:"Nodes in a standing wave are points of:", opts:["Maximum displacement","Zero displacement","Maximum pressure","Minimum pressure"], ans:1},
+  { u:"Unit V – Oscillations and Waves", q:"In critically damped oscillation:", opts:["System oscillates indefinitely","System returns to equilibrium fastest without oscillating","System oscillates with decreasing amplitude","System never returns to equilibrium"], ans:1},
+  // Unit VI – Gravitation
+  { u:"Unit VI – Gravitation", q:"The escape velocity from Earth's surface is approximately:", opts:["7.9 km/s","11.2 km/s","3 km/s","16 km/s"], ans:1},
+  { u:"Unit VI – Gravitation", q:"The value of g decreases as one goes:", opts:["From equator to poles","From poles to equator","From surface upward only","From surface downward only"], ans:0},
+  { u:"Unit VI – Gravitation", q:"A geostationary satellite has a time period of:", opts:["12 hours","24 hours","6 hours","48 hours"], ans:1},
+  { u:"Unit VI – Gravitation", q:"Gravitational potential energy U = −GMm/r. The negative sign indicates:", opts:["Force is repulsive","Reference at infinity, bound system needs energy to escape","Gravity is weak","Force decreases with distance"], ans:1},
+  { u:"Unit VI – Gravitation", q:"Orbital velocity is:", opts:["√(2gR)","√(gR)","√(gR²/(R+h))","gR²"], ans:2},
+  // Unit VII – Electrostatics
+  { u:"Unit VII – Electrostatics", q:"Gauss's law relates electric flux to:", opts:["Total charge outside surface","Total charge enclosed","Surface area","Electric field only"], ans:1},
+  { u:"Unit VII – Electrostatics", q:"Electric field inside a conductor in electrostatic equilibrium is:", opts:["Maximum","Minimum","Zero","Equal to surface charge / ε₀"], ans:2},
+  { u:"Unit VII – Electrostatics", q:"Capacitance of a parallel plate capacitor with dielectric constant K is:", opts:["ε₀A/d","Kε₀A/d","ε₀A/Kd","Kε₀d/A"], ans:1},
+  { u:"Unit VII – Electrostatics", q:"Energy stored in a capacitor of capacitance C charged to V is:", opts:["CV","CV²","½CV²","¼CV²"], ans:2},
+  { u:"Unit VII – Electrostatics", q:"Equipotential surfaces are always:", opts:["Parallel to field lines","Perpendicular to field lines","Same as field lines","Inclined at 45°"], ans:1},
+  // Unit VIII – Electric Conduction
+  { u:"Unit VIII – Electric Conduction", q:"The drift velocity of electrons in a conductor is of the order of:", opts:["10⁸ m/s","10³ m/s","10⁻³ m/s","10⁻⁶ m/s"], ans:2},
+  { u:"Unit VIII – Electric Conduction", q:"Resistivity of a metal increases with temperature because:", opts:["Number of electrons decreases","Electron-phonon collisions increase","Voltage decreases","Current decreases"], ans:1},
+  { u:"Unit VIII – Electric Conduction", q:"The colour code for carbon resistor — RED represents:", opts:["1","2","3","4"], ans:1},
+  { u:"Unit VIII – Electric Conduction", q:"Kirchhoff's junction rule is based on:", opts:["Conservation of energy","Conservation of charge","Ohm's law","Newton's law"], ans:1},
+  { u:"Unit VIII – Electric Conduction", q:"Wiedemann-Franz law relates:", opts:["Thermal and electrical conductivity","Resistance and temperature","Capacitance and resistance","Current and voltage"], ans:0},
+  // Unit IX – Magnetism
+  { u:"Unit IX – Magnetic Effects", q:"The force on a current-carrying conductor in a magnetic field is given by:", opts:["F = qvB","F = BIL sinθ","F = IL/B","F = qE"], ans:1},
+  { u:"Unit IX – Magnetic Effects", q:"Cyclotron frequency is:", opts:["qB/2πm","2πm/qB","qm/2πB","πm/qB"], ans:0},
+  { u:"Unit IX – Magnetic Effects", q:"A moving coil galvanometer is converted to voltmeter by:", opts:["Connecting low resistance in parallel","Connecting high resistance in series","Connecting low resistance in series","Connecting high resistance in parallel"], ans:1},
+  { u:"Unit IX – Magnetic Effects", q:"Paramagnetic materials have susceptibility:", opts:["χ > 0, large","χ < 0","χ > 0, small","χ = 0"], ans:2},
+  { u:"Unit IX – Magnetic Effects", q:"The Biot-Savart law gives the magnetic field due to:", opts:["A static charge","A current element","A magnetic monopole","An electric dipole"], ans:1},
+  // Unit X – EM Induction
+  { u:"Unit X – EM Induction & AC", q:"Lenz's law is a consequence of:", opts:["Conservation of charge","Conservation of energy","Conservation of momentum","Ampere's law"], ans:1},
+  { u:"Unit X – EM Induction & AC", q:"At resonance in LCR series circuit:", opts:["Z = ∞","Z = R","Z = 0","Z = X_L"], ans:1},
+  { u:"Unit X – EM Induction & AC", q:"Power factor of a purely inductive circuit is:", opts:["1","0.5","0","∞"], ans:2},
+  { u:"Unit X – EM Induction & AC", q:"The RMS value of AC current I₀ sinωt is:", opts:["I₀","I₀/2","I₀/√2","I₀√2"], ans:2},
+  { u:"Unit X – EM Induction & AC", q:"Eddy currents are minimised by:", opts:["Using thick iron core","Using laminated iron core","Increasing resistance","Using superconductor"], ans:1},
+  // Unit XI – Mathematical Methods
+  { u:"Unit XI – Mathematical Methods", q:"Stokes' theorem relates:", opts:["Volume integral and surface integral","Line integral and surface integral","Two surface integrals","Two volume integrals"], ans:1},
+  { u:"Unit XI – Mathematical Methods", q:"A Hermitian matrix satisfies:", opts:["A = Aᵀ","A = A†","A = −A","A = A⁻¹"], ans:1},
+  { u:"Unit XI – Mathematical Methods", q:"Eigenvalues of a Hermitian matrix are always:", opts:["Complex","Imaginary","Real","Zero"], ans:2},
+  { u:"Unit XI – Mathematical Methods", q:"The Dirac delta function δ(x) has the property:", opts:["∫δ(x)dx = 0","∫δ(x)dx = ∞","∫δ(x)dx = 1","∫δ(x)dx = x"], ans:2},
+  { u:"Unit XI – Mathematical Methods", q:"The covariant and contravariant components of a tensor transform:", opts:["In the same way","In different ways","Do not transform","Randomly"], ans:1},
+];
+
+const p2Questions = [
+  // Unit I – EM Waves
+  { u:"Unit I – Electromagnetic Waves", q:"Displacement current was introduced by:", opts:["Faraday","Maxwell","Ampere","Hertz"], ans:1},
+  { u:"Unit I – Electromagnetic Waves", q:"The Poynting vector represents:", opts:["Energy density of EM wave","Energy flux (power per unit area)","Momentum of photon","Magnetic field intensity"], ans:1},
+  { u:"Unit I – Electromagnetic Waves", q:"In free space, the speed of EM waves is:", opts:["1/√(μ₀ε₀)","√(μ₀ε₀)","μ₀ε₀","c²"], ans:0},
+  { u:"Unit I – Electromagnetic Waves", q:"EM waves are:", opts:["Longitudinal","Transverse","Both longitudinal and transverse","Neither"], ans:1},
+  { u:"Unit I – Electromagnetic Waves", q:"Which EM wave has the shortest wavelength?", opts:["Radio waves","Microwaves","X-rays","Gamma rays"], ans:3},
+  { u:"Unit I – Electromagnetic Waves", q:"In Maxwell's 4th equation (modified Ampere's law):", opts:["∇×B = μ₀J","∇×B = μ₀J + μ₀ε₀∂E/∂t","∇·B = 0","∇·E = ρ/ε₀"], ans:1},
+  { u:"Unit I – Electromagnetic Waves", q:"The refractive index n of a medium in terms of εᵣ and μᵣ is:", opts:["εᵣμᵣ","√(εᵣμᵣ)","εᵣ/μᵣ","μᵣ/εᵣ"], ans:1},
+  { u:"Unit I – Electromagnetic Waves", q:"Ozone layer absorbs which radiation?", opts:["Radio waves","Infrared","Ultraviolet","Microwaves"], ans:2},
+  { u:"Unit I – Electromagnetic Waves", q:"Gauge invariance in electrodynamics means:", opts:["Fields change with gauge","Physical results are independent of gauge choice","Potentials are physical observables","Maxwell's equations change with gauge"], ans:1},
+  { u:"Unit I – Electromagnetic Waves", q:"The electric and magnetic fields in a plane EM wave are:", opts:["Parallel to each other","Perpendicular to each other and to direction of propagation","Anti-parallel","Random"], ans:1},
+  // Unit II – Optics
+  { u:"Unit II – Optics", q:"Critical angle for total internal reflection is given by:", opts:["sinθ_c = n₁/n₂","sinθ_c = n₂/n₁","sinθ_c = n₁n₂","sinθ_c = 1/n"], ans:1},
+  { u:"Unit II – Optics", q:"Fringe width in Young's double slit experiment is:", opts:["λd/D","λD/d","dD/λ","d/λD"], ans:1},
+  { u:"Unit II – Optics", q:"Polarisation of light proves its:", opts:["Longitudinal nature","Transverse nature","Both natures","Particle nature"], ans:1},
+  { u:"Unit II – Optics", q:"Brewster's angle θ_B is related to refractive index n as:", opts:["sinθ_B = n","cosθ_B = n","tanθ_B = n","cotθ_B = n"], ans:2},
+  { u:"Unit II – Optics", q:"In single slit diffraction, the condition for first minimum is:", opts:["asinθ = λ","asinθ = λ/2","asinθ = 2λ","asinθ = λ/4"], ans:0},
+  { u:"Unit II – Optics", q:"Blue colour of sky is due to:", opts:["Absorption of red light","Rayleigh scattering of blue light","Reflection","Diffraction"], ans:1},
+  { u:"Unit II – Optics", q:"Resolving power of a telescope increases when:", opts:["Wavelength increases","Aperture decreases","Aperture increases","Focal length decreases"], ans:2},
+  { u:"Unit II – Optics", q:"Optical fibre works on the principle of:", opts:["Refraction","Diffraction","Total internal reflection","Polarisation"], ans:2},
+  { u:"Unit II – Optics", q:"Malus's law states that I =", opts:["I₀ sinθ","I₀ cosθ","I₀ cos²θ","I₀ sin²θ"], ans:2},
+  { u:"Unit II – Optics", q:"The lens formula is:", opts:["1/f = 1/u + 1/v","1/f = 1/v − 1/u","1/f = 1/v + 1/u (with sign convention)","1/f = v − u"], ans:1},
+  // Unit III – Thermodynamics
+  { u:"Unit III – Thermodynamics", q:"Carnot engine efficiency depends on:", opts:["Working substance","Temperatures of source and sink only","Speed of operation","Pressure"], ans:1},
+  { u:"Unit III – Thermodynamics", q:"The second law of thermodynamics implies:", opts:["Energy conservation","Entropy of universe always increases","Temperature is conserved","No work is possible"], ans:1},
+  { u:"Unit III – Thermodynamics", q:"For an isothermal process of an ideal gas:", opts:["Temperature changes","ΔU = 0","Q = 0","W = 0"], ans:1},
+  { u:"Unit III – Thermodynamics", q:"For a reversible adiabatic process:", opts:["dQ = 0 and dS = 0","dQ ≠ 0","dS > 0","dU = 0"], ans:0},
+  { u:"Unit III – Thermodynamics", q:"The third law of thermodynamics states:", opts:["Entropy = 0 at T = 0K for perfect crystals","Energy = 0 at T = 0K","Temperature cannot be negative","Entropy is always positive"], ans:0},
+  { u:"Unit III – Thermodynamics", q:"COP of a refrigerator is:", opts:["T_H/(T_H − T_L)","T_L/(T_H − T_L)","(T_H − T_L)/T_L","1 − T_L/T_H"], ans:1},
+  // Unit IV – Kinetic Theory
+  { u:"Unit IV – Kinetic Theory of Gases", q:"The rms speed of gas molecules is proportional to:", opts:["T","√T","T²","1/T"], ans:1},
+  { u:"Unit IV – Kinetic Theory of Gases", q:"Degrees of freedom of a diatomic molecule at room temperature:", opts:["3","5","6","7"], ans:1},
+  { u:"Unit IV – Kinetic Theory of Gases", q:"Mean free path of a molecule is:", opts:["∝ n (number density)","∝ 1/n","∝ n²","Independent of n"], ans:1},
+  { u:"Unit IV – Kinetic Theory of Gases", q:"The ratio γ = C_p/C_v for a monatomic ideal gas is:", opts:["1","5/3","7/5","4/3"], ans:1},
+  { u:"Unit IV – Kinetic Theory of Gases", q:"Avogadro's number N_A is approximately:", opts:["6.02×10²³","6.02×10²⁶","3.01×10²³","1.38×10²³"], ans:0},
+  // Unit V – Dual Nature
+  { u:"Unit V – Dual Nature of Matter", q:"The photoelectric effect was explained by:", opts:["Maxwell","Hertz","Einstein","Compton"], ans:2},
+  { u:"Unit V – Dual Nature of Matter", q:"de Broglie wavelength λ = h/p. For a particle of kinetic energy E, λ is:", opts:["h/√(2mE)","h/2mE","√(2mE)/h","h√(2mE)"], ans:0},
+  { u:"Unit V – Dual Nature of Matter", q:"Davisson-Germer experiment confirmed:", opts:["Wave nature of electrons","Particle nature of light","Charge of electron","Speed of light"], ans:0},
+  { u:"Unit V – Dual Nature of Matter", q:"Heisenberg's uncertainty relation is:", opts:["ΔxΔp ≥ h","ΔxΔp ≥ ℏ/2","ΔxΔp ≥ 2ℏ","ΔxΔp ≥ h/4π"], ans:1},
+  { u:"Unit V – Dual Nature of Matter", q:"The Compton shift Δλ depends on:", opts:["Incident wavelength","Atomic number of target","Scattering angle only","Material of target"], ans:2},
+  { u:"Unit V – Dual Nature of Matter", q:"The ground state energy of a particle in 1D box of length L is:", opts:["π²ℏ²/2mL²","2π²ℏ²/mL²","πℏ/2mL","ℏ²/mL²"], ans:0},
+  // Unit VI – Atoms & Nuclei
+  { u:"Unit VI – Atoms and Nuclei", q:"In Bohr's model, the energy of nth orbit is:", opts:["13.6/n eV","−13.6/n² eV","13.6n² eV","−13.6n eV"], ans:1},
+  { u:"Unit VI – Atoms and Nuclei", q:"The Balmer series of hydrogen spectrum lies in:", opts:["UV region","Visible region","IR region","X-ray region"], ans:1},
+  { u:"Unit VI – Atoms and Nuclei", q:"The half-life of a radioactive substance is related to decay constant λ as:", opts:["t₁/₂ = λ/0.693","t₁/₂ = 0.693/λ","t₁/₂ = 1/λ","t₁/₂ = λ"], ans:1},
+  { u:"Unit VI – Atoms and Nuclei", q:"Nuclear binding energy per nucleon is maximum for:", opts:["Hydrogen","Uranium","Iron (Fe-56)","Carbon"], ans:2},
+  { u:"Unit VI – Atoms and Nuclei", q:"In nuclear fission, the energy is released because:", opts:["Mass is created","Binding energy per nucleon increases","Temperature increases","Electrons are emitted"], ans:1},
+  { u:"Unit VI – Atoms and Nuclei", q:"Alpha particle is identical to:", opts:["He-4 nucleus","Proton","Neutron","Electron"], ans:0},
+  // Unit VII – Atomic & Molecular Physics
+  { u:"Unit VII – Atomic & Molecular Physics", q:"Pauli's exclusion principle states:", opts:["No two electrons can have same energy","No two fermions can occupy the same quantum state","All electrons have same spin","Electrons must be in lowest energy state"], ans:1},
+  { u:"Unit VII – Atomic & Molecular Physics", q:"Normal Zeeman effect gives rise to:", opts:["1 line","2 lines","3 lines","Many lines"], ans:2},
+  { u:"Unit VII – Atomic & Molecular Physics", q:"Laser action requires:", opts:["Thermal equilibrium","Population inversion","Equal population in all levels","Maximum absorption"], ans:1},
+  { u:"Unit VII – Atomic & Molecular Physics", q:"Spontaneous emission probability is given by Einstein's:", opts:["A coefficient","B coefficient","C coefficient","D coefficient"], ans:0},
+  { u:"Unit VII – Atomic & Molecular Physics", q:"Stern-Gerlach experiment demonstrated:", opts:["Electron charge","Space quantisation of magnetic moment","Wave-particle duality","Nuclear structure"], ans:1},
+  // Unit VIII – Nuclear & Particle Physics
+  { u:"Unit VIII – Nuclear & Particle Physics", q:"The quark content of a proton is:", opts:["udd","uud","uus","dds"], ans:1},
+  { u:"Unit VIII – Nuclear & Particle Physics", q:"Which interaction is responsible for beta decay?", opts:["Strong force","Electromagnetic","Weak nuclear force","Gravitational"], ans:2},
+  { u:"Unit VIII – Nuclear & Particle Physics", q:"Baryon number is conserved in:", opts:["Strong interactions only","Electromagnetic only","All known interactions","Weak interactions only"], ans:2},
+  { u:"Unit VIII – Nuclear & Particle Physics", q:"The Gell-Mann–Nishijima formula relates Q to:", opts:["I₃ and strangeness","Mass and charge","Spin and parity","Baryon number and lepton number"], ans:0},
+  { u:"Unit VIII – Nuclear & Particle Physics", q:"Liquid drop model of nucleus is used to explain:", opts:["Nuclear magic numbers","Nuclear fission","Radioactivity","Electron energy levels"], ans:1},
+  // Unit IX – Electronics
+  { u:"Unit IX – Electronic Devices", q:"A Zener diode is used as:", opts:["Amplifier","Rectifier","Voltage regulator","Switch"], ans:2},
+  { u:"Unit IX – Electronic Devices", q:"The universal gate(s) are:", opts:["AND and OR","NOT only","NAND and NOR","XOR and XNOR"], ans:2},
+  { u:"Unit IX – Electronic Devices", q:"For a transistor in common emitter configuration, current gain β is:", opts:["I_C/I_B","I_E/I_B","I_B/I_C","I_C/I_E"], ans:0},
+  { u:"Unit IX – Electronic Devices", q:"In forward biased p-n junction, the barrier potential:", opts:["Increases","Decreases","Remains same","Becomes zero"], ans:1},
+  { u:"Unit IX – Electronic Devices", q:"De Morgan's theorem: (A·B)' = ?", opts:["A'·B'","A'+B'","A·B","A+B"], ans:1},
+  { u:"Unit IX – Electronic Devices", q:"An ideal op-amp has:", opts:["Zero input impedance","Infinite gain and input impedance","Finite gain","Low bandwidth"], ans:1},
+  // Unit X – Communication
+  { u:"Unit X – Communication Systems", q:"In amplitude modulation, the bandwidth is:", opts:["f_m","2f_m","f_c","f_c + f_m"], ans:1},
+  { u:"Unit X – Communication Systems", q:"Sky wave propagation uses:", opts:["Troposphere","Ionosphere","Stratosphere","Exosphere"], ans:1},
+  { u:"Unit X – Communication Systems", q:"The range of a TV tower of height h on Earth of radius R is:", opts:["Rh","√(Rh)","√(2Rh)","2Rh"], ans:2},
+  { u:"Unit X – Communication Systems", q:"Modulation is done to:", opts:["Reduce frequency","Increase signal strength at receiver","Enable transmission of low-frequency signals over long distance","Decrease bandwidth"], ans:2},
+  { u:"Unit X – Communication Systems", q:"FM is superior to AM in:", opts:["Bandwidth","Noise immunity","Signal range","Cost"], ans:1},
+  // Unit XI – Condensed Matter
+  { u:"Unit XI – Condensed Matter Physics", q:"Bragg's law for X-ray diffraction is:", opts:["2d cosθ = nλ","2d sinθ = nλ","d sinθ = nλ","d cosθ = nλ"], ans:1},
+  { u:"Unit XI – Condensed Matter Physics", q:"In superconductors, the Meissner effect means:", opts:["Zero resistance","Complete expulsion of magnetic flux","High critical temperature","Infinite thermal conductivity"], ans:1},
+  { u:"Unit XI – Condensed Matter Physics", q:"The Fermi energy is the energy of the:", opts:["Lowest energy electron","Highest occupied energy level at 0K","Average electron energy","Lattice vibration energy"], ans:1},
+  { u:"Unit XI – Condensed Matter Physics", q:"BCS theory explains superconductivity through:", opts:["Phonon-electron interaction forming Cooper pairs","Magnetic ordering","Band gap","Localized electrons"], ans:0},
+  { u:"Unit XI – Condensed Matter Physics", q:"The number of Bravais lattices in 3D is:", opts:["7","10","14","32"], ans:2},
+  { u:"Unit XI – Condensed Matter Physics", q:"In a semiconductor, the band gap E_g is approximately:", opts:["0 eV","~1 eV","~5 eV","~10 eV"], ans:1},
+];
+
+// ─── RENDER MCQ ────────────────────────────────────────────────
+function renderMCQ(questions, containerId) {
+  const c = document.getElementById(containerId);
+  let html = '';
+  let lastUnit = '';
+  questions.forEach((q, i) => {
+    if (q.u !== lastUnit) {
+      html += `<div class="unit-sep">— ${q.u} —</div>`;
+      lastUnit = q.u;
+    }
+    html += `<div class="question-block">
+      <div class="q-num">Q.${i+1}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="options">
+        ${q.opts.map((o,oi)=>`<div class="option">(${String.fromCharCode(65+oi)}) ${o}</div>`).join('')}
+      </div>
+      <button class="show-answer-btn" onclick="toggleAns(this, ${q.ans}, ${JSON.stringify(q.opts).replace(/"/g,"'")})">Show Answer</button>
+      <div class="answer-row" id="ans-${containerId}-${i}">
+        <div class="answer-text">✔ Correct: (${String.fromCharCode(65+q.ans)}) ${q.opts[q.ans]}</div>
+      </div>
+    </div>`;
+  });
+  c.innerHTML = html;
+}
+
+function toggleAns(btn, ansIdx, opts) {
+  const row = btn.nextElementSibling;
+  row.classList.toggle('visible');
+  btn.textContent = row.classList.contains('visible') ? 'Hide Answer' : 'Show Answer';
+}
+
+renderMCQ(p1Questions, 'mcq-p1');
+renderMCQ(p2Questions, 'mcq-p2');
+</script>
+
+</body>
+</html>
